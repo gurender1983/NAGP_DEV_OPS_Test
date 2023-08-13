@@ -6,7 +6,7 @@ pipeline{
           SONAR_PROJECT_KEY = 'Gurender_3151401_SeleniumAutomation:Gurender_3151401_SeleniumAutomation' 
           SONAR_SERVER_URL = 'http://localhost:9000/' 
           SONAR_LOGIN = 'sqa_e51c02d6846b755035c6f242b27ad881310be3ab' 
-		  notifyEmail ="vijay.jadon@nagarro.com"
+		  notifyEmail ="gurender.kush@nagarro.com"
 	}
     tools{
         maven 'maven_home'
