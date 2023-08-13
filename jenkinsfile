@@ -1,0 +1,50 @@
+pipeline{
+    agent any
+    	environment {
+          SCANNER_HOME = tool name: 'Test_Sonar', 
+          type: 'hudson.plugins.sonar.SonarRunnerInstallation'
+          SONAR_PROJECT_KEY = 'Gurender_3151401_SeleniumAutomation:Gurender_3151401_SeleniumAutomation' 
+          SONAR_SERVER_URL = 'http://localhost:9000/' 
+          SONAR_LOGIN = 'sqa_e51c02d6846b755035c6f242b27ad881310be3ab' 
+		  notifyEmail ="gurender.kush@nagarro.com"
+	}
+    tools{
+        maven 'maven_home'
+    }
+    triggers {
+    	cron('0 06 * * *')
+  	}
+    
+    stages{
+        stage("code checkout"){
+            steps{
+            bat "echo hello"
+            }
+        }   
+
+        stage("code build"){
+            steps{
+             bat "mvn clean test"
+            }
+        }
+        stage("unit test"){
+            steps{
+            bat "mvn test "
+            }
+        }
+stage('SonarQube Analysis') {
+            steps {
+                script {
+                    withEnv(["PATH+SONARQUBE_SCANNER=${env.SCANNER_HOME}/bin"]) {
+                        sh "sonar-scanner -Dsonar.projectKey=${env.SONAR_PROJECT_KEY} -Dsonar.host.url=${env.SONAR_SERVER_URL} -Dsonar.login=${env.SONAR_LOGIN}"
+                    }
+                }
+            }
+    }}
+    post{
+        success{
+            bat "echo success"
+            }
+        }
+}
+
