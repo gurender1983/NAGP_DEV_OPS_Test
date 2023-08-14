@@ -50,8 +50,8 @@ stage('SonarQube Analysis') {
         rtMavenDeployer(
             id:'deployer',
             serverId:'nagpleanr@artifactory',
-            releaseRepo:'LearnPipeline',
-            snapshotRepo:'LearnPipeline'
+            releaseRepo:'NAGP_G',
+            snapshotRepo:'NAGP_G'
         )
         rtMavenRun(
             pom:'pom.xml',
